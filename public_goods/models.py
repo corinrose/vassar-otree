@@ -9,7 +9,8 @@ This is a one-period public goods game with 3 players.
 """
 
 # generate random participants
-#bot_contribution = random.randint(0, 200)
+bot_allocation = random.choice([50, 75, 100])
+bot_contribution = random.randint(0, bot_allocation * 2)
 
 class Constants(BaseConstants):
     name_in_url = 'public_goods'
@@ -19,8 +20,7 @@ class Constants(BaseConstants):
     instructions_template = 'public_goods/Instructions.html'
 
     # """Amount allocated to each player"""
-    possible_allocations = [50, 75, 100]
-    endowment = c(possible_allocations[random.randint(0, 2)])
+    endowment = c(100)
     multiplier = 2
 
 
@@ -47,7 +47,7 @@ class Group(BaseGroup):
     individual_share = models.CurrencyField()
 
     def set_payoffs(self):
-        self.total_contribution = sum([p.contribution for p in self.get_players() if p.contribution != None]) + random.randint(0, 200)
+        self.total_contribution = sum([p.contribution for p in self.get_players() if p.contribution != None]) + bot_contribution
         #self.individual_share = self.total_contribution * Constants.multiplier / Constants.players_per_group
         self.individual_share = self.total_contribution * Constants.multiplier / 3
         for p in self.get_players():
