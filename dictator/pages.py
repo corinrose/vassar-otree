@@ -14,13 +14,15 @@ class Offer(Page):
         return self.player.id_in_group == 1
 
 
-class ResultsWaitPage(WaitPage):
-    def after_all_players_arrive(self):
-        self.group.set_payoffs()
+#class ResultsWaitPage(WaitPage):
+#    timeout_seconds = 1;
+#    def after_all_players_arrive(self):
+#        self.group.set_payoffs()
 
 
 class Results(Page):
     def vars_for_template(self):
+        self.group.set_payoffs()
         return {
             'offer': Constants.endowment - self.group.kept,
         }
@@ -29,6 +31,6 @@ class Results(Page):
 page_sequence = [
     Introduction,
     Offer,
-    ResultsWaitPage,
+    #ResultsWaitPage,
     Results
 ]

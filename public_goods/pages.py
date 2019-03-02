@@ -26,14 +26,16 @@ class Results(Page):
     """Players payoff: How much each has earned"""
 
     def vars_for_template(self):
+        self.group.set_payoffs()
         return {
             'total_earnings': self.group.total_contribution * Constants.multiplier,
         }
+        self.group.total_contributions = 0
 
 
 page_sequence = [
     Introduction,
     Contribute,
-    ResultsWaitPage,
+    #ResultsWaitPage,
     Results
 ]

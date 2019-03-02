@@ -18,7 +18,7 @@ S285-S300.
 
 class Constants(BaseConstants):
     name_in_url = 'dictator'
-    players_per_group = 2
+    players_per_group = None
     num_rounds = 1
 
     instructions_template = 'dictator/Instructions.html'
@@ -39,9 +39,9 @@ class Group(BaseGroup):
 
     def set_payoffs(self):
         p1 = self.get_player_by_id(1)
-        p2 = self.get_player_by_id(2)
+        #p2 = self.get_player_by_id(2)
         p1.payoff = self.kept
-        p2.payoff = Constants.endowment - self.kept
+        #p2.payoff = self.kept #Constants.endowment - self.kept
 
 
 class Player(BasePlayer):
