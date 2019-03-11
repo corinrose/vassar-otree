@@ -8,12 +8,12 @@
     You are <strong>Participant 1</strong>.
     Please decide how much of the {{ Constants.endowment }}
     you will keep for yourself.
+    Remember that how many points you keep for yourself will affect your bonus payment.
 </p>
 
 {% formfield group.kept label="I will keep" %}
 
 {% next_button %}
 
-    {% include Constants.instructions_template %}
 
 {% endblock %}

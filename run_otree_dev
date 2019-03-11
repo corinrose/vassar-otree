@@ -1,0 +1,3 @@
+#!/bin/bash
+
+otree runprodserver 8080
