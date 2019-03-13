@@ -28,9 +28,10 @@ class Results(Page):
     def vars_for_template(self):
         self.group.set_payoffs()
         return {
-            'total_earnings': self.group.total_contribution * Constants.multiplier,
+            'earnings': self.group.total_contribution * Constants.multiplier / 3,
+            'condition' : Constants.bot_allocation,
         }
-        self.group.total_contributions = 0
+        #self.group.total_contributions = 0
 
 
 page_sequence = [

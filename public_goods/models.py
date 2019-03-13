@@ -15,7 +15,6 @@ class Constants(BaseConstants):
     num_rounds = 1
 
     bot_allocation = random.choice([50, 75, 100])
-    bot_contribution = random.randint(0, bot_allocation * 2)
     instructions_template = 'public_goods/Instructions' + str(bot_allocation)  + '.html'
 
     
@@ -25,23 +24,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    def vars_for_admin_report(self):
-        return { 'bot_allocation' : Constants.bot_allocation }
-        #contributions = [p.contribution for p in self.get_players() if p.contribution != None]
-        '''
-        if contributions:
-            return {
-                'avg_contribution': sum(contributions)/len(contributions),
-                'min_contribution': min(contributions),
-                'max_contribution': max(contributions),
-            }
-        else:
-            return {
-                'avg_contribution': '(no data)',
-                'min_contribution': '(no data)',
-                'max_contribution': '(no data)',
-            }
-        '''
+    pass
 
 class Group(BaseGroup):
     total_contribution = models.CurrencyField()
@@ -49,13 +32,16 @@ class Group(BaseGroup):
     individual_share = models.CurrencyField()
 
     def set_payoffs(self):
-        self.total_contribution = sum([p.contribution for p in self.get_players() if p.contribution != None]) + Constants.bot_contribution
+        self.total_contribution = sum([p.contribution + random.randint(0, p.condition * 2) for p in self.get_players() if p.contribution != None]) 
         #self.individual_share = self.total_contribution * Constants.multiplier / Constants.players_per_group
         self.individual_share = self.total_contribution * Constants.multiplier / 3
         for p in self.get_players():
             p.payoff = (Constants.endowment - p.contribution) + self.individual_share
 
 class Player(BasePlayer):
+    
+    condition = models.IntegerField(initial=Constants.bot_allocation)
+    
     contribution = models.CurrencyField(
         min=0, max=Constants.endowment,
         doc="""The amount contributed by the player""",

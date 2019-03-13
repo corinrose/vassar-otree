@@ -37,4 +37,5 @@ class Player(BasePlayer):
         label=''' Please enter your Prolific ID''')
     
     sugg = models.StringField(blank=True,
-        label=''' Let us know if you had any problems''')
+        label=''' Were there any technical problems with this experiment? Did you find the instructions to be
+        clear? Do you have any other comments? ''')
