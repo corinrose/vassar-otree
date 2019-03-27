@@ -28,7 +28,7 @@ class Results(Page):
     def vars_for_template(self):
         self.group.set_payoffs()
         return {
-            'earnings': self.group.total_contribution * Constants.multiplier / 3,
+            'earnings': self.group.total_contribution * Constants.multiplier,
             'condition' : Constants.bot_allocation,
         }
         #self.group.total_contributions = 0
