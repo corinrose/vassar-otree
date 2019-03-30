@@ -6,7 +6,7 @@ server_ip = "69.55.55.84"
 port = "8080"
 
 def create_session():
-    new_session_process = subprocess.Popen("otree create_session dictator_goods 1".split(), stderr=subprocess.PIPE, stdout=subprocess.PIPE, cwd="../")
+    new_session_process = subprocess.Popen("otree create_session public_goods 1".split(), stderr=subprocess.PIPE, stdout=subprocess.PIPE, cwd="../")
 
     new_session_process.wait()
 

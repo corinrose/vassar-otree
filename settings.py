@@ -13,10 +13,10 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
     {
-        'name': 'dictator_goods',
-        'display_name': "Dictator and Public Goods Game",
+        'name': 'public_goods',
+        'display_name': "Public Goods Game",
         'num_demo_participants': 1,
-        'app_sequence': ['dictator', 'public_goods', 'survey', 'payment_info'],
+        'app_sequence': ['public_goods', 'survey', 'payment_info'],
         'group_by_arrival_time': True,
     },
 ]

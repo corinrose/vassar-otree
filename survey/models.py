@@ -21,13 +21,6 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    '''
-    gender = models.StringField(
-        choices=['Male', 'Female', 'Other'],
-        label='What is your gender?',
-        widget=widgets.RadioSelect)
-    '''
-
     econ_train = models.StringField(
         choices=['None', 'Some classes in high school', 'Some classes in college', 'Minor in college', 'Major in college', 'Advanced degree in economics'],
         label=''' Have you had any formal economics training? ''',

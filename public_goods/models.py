@@ -14,10 +14,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
 
-    bot_allocation = random.choice([50, 75, 100])
-    instructions_template = 'public_goods/Instructions' + str(bot_allocation)  + '.html'
 
-    
     # """Amount allocated to each player"""
     endowment = c(100)
     multiplier = 2
@@ -32,15 +29,22 @@ class Group(BaseGroup):
     individual_share = models.CurrencyField()
 
     def set_payoffs(self):
-        self.total_contribution = sum([p.contribution + random.randint(0, p.condition * 2) for p in self.get_players() if p.contribution != None]) 
-        #self.individual_share = self.total_contribution * Constants.multiplier / Constants.players_per_group
+        player = self.get_players()[0]
+
+        bot_allocation = 100
+
+        if player.condition == 2:
+            bot_allocation = 50
+        elif player.condition == 3:
+            bot_allocation = 75
+
+        self.total_contribution = player.contribution + random.randint(0, bot_allocation * 2)
         self.individual_share = self.total_contribution * Constants.multiplier / 3
-        for p in self.get_players():
-            p.payoff = (Constants.endowment - p.contribution) + self.individual_share
+        player.payoff = (Constants.endowment - player.contribution) + self.individual_share
 
 class Player(BasePlayer):
-    
-    condition = models.IntegerField(initial=Constants.bot_allocation)
+
+    condition = models.IntegerField(initial=random.choice([1, 2, 3, 4]))
     
     contribution = models.CurrencyField(
         min=0, max=Constants.endowment,

@@ -4,6 +4,10 @@ from .models import Constants
 
 
 class Introduction(Page):
+
+    def vars_for_template(self):
+        return { 'instructions_template' : 'public_goods/Instructions' + str(self.player.condition) + '.html'}
+
     """Description of the game: How to play and returns expected"""
     pass
 
@@ -29,7 +33,6 @@ class Results(Page):
         self.group.set_payoffs()
         return {
             'earnings': self.group.total_contribution * Constants.multiplier,
-            'condition' : Constants.bot_allocation,
         }
         #self.group.total_contributions = 0
 
