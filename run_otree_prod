@@ -1,3 +1,0 @@
-#!/bin/bash
-
-OTREE_PRODUCTION=1 OTREE_AUTH_LEVEL="STUDY" OTREE_ADMIN_PASSWORD="otreeadmin5584" otree runprodserver 8080
